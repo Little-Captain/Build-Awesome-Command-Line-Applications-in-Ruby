@@ -1,0 +1,4 @@
+Add new field to database for 'accepted terms on date',2018-03-18 19:00:50 +0800,2018-03-18 21:25:28 +0800
+Get DBA approval for new field,2018-03-18 19:01:21 +0800,2018-03-18 19:07:54 +0800
+Add new field to database for 'accepted terms on date',2018-03-18 21:24:23 +0800,2018-03-18 21:25:41 +0800
+Get DBA approval for new field,2018-03-18 21:24:59 +0800,
