@@ -1,27 +1,30 @@
 #!/usr/bin/env ruby
 TODO_FILE = 'todo.txt'
 
+# 行切分函数
 def read_todo(line)
   line.chomp.split(/,/)
 end
 
+# 行写入函数
 def write_todo(file, name, created = Time.now, completed = '')
   file.puts("#{name},#{created},#{completed}")
 end
 
+# 获取第一个参数
 command = ARGV.shift
-case command
-when 'new'
-  new_task = ARGV.shift
+case command # 匹配 command
+when 'new' # 新建任务
+  new_task = ARGV.shift # 获取任务内容
   File.open(TODO_FILE, "a") do |file|
-    write_todo(file, new_task)
+    write_todo(file, new_task) # 写入文件
     puts "Task added."
   end
-when 'list'
+when 'list' # 列出现有任务
   File.open(TODO_FILE, 'r') do |file|
     counter = 1
     file.readlines.each do |line|
-      name, created, completed = read_todo(line)
+      name, created, completed = read_todo(line) # 解析一行的具体内容
       printf("%3d - %s\n", counter, name)
       printf("      Created    : %s\n", created)
       unless completed.nil?
@@ -30,14 +33,14 @@ when 'list'
       counter += 1
     end
   end
-when 'done'
-  task_number = ARGV.shift.to_i
+when 'done' # 任务完成
+  task_number = ARGV.shift.to_i # 获取完成任务的编号
   File.open(TODO_FILE, 'r') do |file|
     File.open("#{TODO_FILE}.new", 'w') do |new_file|
       counter = 1
       file.readlines.each do |line|
-        name, created, completed = read_todo(line)
-        if task_number == counter
+        name, created, completed = read_todo(line) # 解析一行的内容
+        if task_number == counter # 找到需要完成的任务编号, 写入文件
           write_todo(new_file, name, created, Time.now)
           puts "Task #{counter} completed"
         else
@@ -49,3 +52,16 @@ when 'done'
   end
   `mv #{TODO_FILE}.new #{TODO_FILE}`
 end
+
+# def 方法名
+#   方法具体实现代码
+# end
+
+# case 待匹配的对象
+# when 可能1
+#   语句
+# when 可能2
+#   语句
+# when 可能3
+#   语句
+# end
