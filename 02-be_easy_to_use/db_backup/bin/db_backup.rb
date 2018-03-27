@@ -17,7 +17,13 @@ option_parser = OptionParser.new do | opts |
   
   # Create a flag
   # 解析 -u USER 标志(flag)
-  opts.on("-u USER") do | user |
+  # opts.on("-u USER") do | user |
+  #   unless user =~ /^.+\..+$/ # .: 任意字符(not \n) +: 1,n $: 字符串结束位置
+  #     raise ArgumentError, 'USER must be in 'first.last' format'
+  #   end
+  #   options[:user] = user
+  # end
+  opts.on("-u USER", /^.+\..+$/) do | user |
     options[:user] = user
   end
   
